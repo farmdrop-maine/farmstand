@@ -1,0 +1,4 @@
+include README.md
+recursive-include farmstand/static *
+recursive-include farmstand/templates *
+recursive-include farmstand/apps *
