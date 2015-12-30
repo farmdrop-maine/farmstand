@@ -1,11 +1,11 @@
-Bazaar
-==============
+Farmstand
+=========
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/farmdrop-maine/farmstand?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Build
 Status](https://travis-ci.org/farmdrop-maine/farmstand.svg?branch=master)](https://travis-ci.org/farmdrop-maine/farmstand)
 
-Bazaar is a multi-vendor store front and inventory manager designed for use with
+Farmstand is a multi-vendor store front and inventory manager designed for use with
 farm vendors who have a diversity of stock, sale prices and use scenarios. Once
 an order is placed, including products from multiple vendors, a single payment
 is processed and all the different vendors drop their products off at a central
