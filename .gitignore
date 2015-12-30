@@ -60,7 +60,27 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+/public/media/
 
 venv
 *.sqlite3
 .vagrant
+
+*.py[cod]
+.*
+!.buildpacks
+!.coveragerc
+!.dockerignore
+!.flowconfig
+!.gitignore
+!.travis*
+*.css
+*.log
+*.pot
+*.pyc
+dev.sqlite
+build/
+dist/
+*\.egg*
+#data
+/node_modules/

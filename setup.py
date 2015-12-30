@@ -11,8 +11,8 @@ install_requires = [
     'dj-database-url==0.3.0',
     'django-suit==0.2.15',
     'pylibmc==1.3.0',
-    'Pillow==2.0.0',
-    'django-cache-url==0.8.0',
+    'Pillow==3.0.0',
+    'django-cache-url==1.0.0',
     'werkzeug==0.9.4',
     'gunicorn==0.17.4',
     'easy-thumbnails==1.2',
@@ -28,16 +28,36 @@ install_requires = [
     'factory_boy==2.5.1',
     'boto==2.9.5',
     'django-storages==1.1.8',
-    'djangorestframework==3.1.0',
+    'djangorestframework==3.3.2',
     'django-cors-headers==1.1.0',
-    'markdown==2.6.1',
+    'markdown==2.6.5',
     'django-filter==0.9.2',
     'django-templated-email==0.4.9',
-    'psycopg2==2.5'
+    'psycopg2==2.6.1'
 ]
 
 # App specific libraries
 install_requires += [
+    'google-measurement-protocol==0.1.5',
+    'unidecode==0.4.18',
+    'jsonfield==1.0.3',
+    'dj-email-url==0.0.4',
+    'django-payments==0.9.1',
+    'django-prices==0.4.8',
+    'django-emailit==0.2.2',
+    'django-versatileimagefield==1.2',
+    'django-materializecss-form==0.1',
+    'django-model-utils==2.4',
+    'django-mptt==0.8.0',
+    'mock==1.3.0',
+    'requests==2.9.0',
+    'satchless==1.1.3',
+    'pytest-django==2.9.1',
+    'pytest==2.8.5',
+    'purl==1.1',
+    'fake-factory==0.5.3',
+    'django-redis==4.3.0',
+    'django-selectable==0.9.0'
 ]
 
 dep_links = [

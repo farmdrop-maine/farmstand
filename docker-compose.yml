@@ -1,0 +1,24 @@
+db:
+  image: postgres
+  environment:
+    - POSTGRES_USER=saleor
+    - POSTGRES_PASSWORD=saleor
+redis:
+  image: redis
+mailcatcher:
+  image: schickling/mailcatcher
+  ports:
+    - '1080:1080'
+web:
+  build: .
+  environment:
+    - SECRET_KEY=changeme
+    - DEFAULT_FROM_EMAIL=info@getsaleor.com
+  links:
+    - db
+    - mailcatcher
+    - redis
+  ports:
+    - '8000:8000'
+  volumes:
+    - .:/app

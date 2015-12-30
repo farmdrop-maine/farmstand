@@ -1,138 +1,121 @@
-{% load static %}
 <!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="theme-color" content="#2196F3">
-    <title>{% block page_title %}django outline 2.0{% endblock %}</title>
+{% load i18n %}
+{% load staticfiles %}
 
-    <!-- CSS  -->
-    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet">
-    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" >
-    <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet" >
+<html lang="en" class="no-js">
+    <head>
+        <title>{% block title %}Saleor{% endblock %}</title>
+        {% block meta %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% block meta_description %}{% endblock %}">
+        <meta name="author" content="{% trans "Mirumee Software" %}">
+        {% endblock meta %}
 
-    {# Custom CSS #}
-    {% block css %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/storefront.css" %}">
 
-    <script src="{% static 'js/modernizr.js' %}"></script> <!-- Modernizr -->
+        {% block stylesheet %}{% endblock stylesheet %}
 
-    {# Custom head JS #}
-    {% block head_js %}{% endblock %}
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
 
-</head>
-<body id="top" class="scrollspy" {% block body_attr %}{% endblock body_attr %}>
-
-<!-- Pre Loader -->
-<div id="loader-wrapper">
-    <div id="loader"></div>
- 
-    <div class="loader-section section-left"></div>
-    <div class="loader-section section-right"></div>
- 
-</div>
-
-<!--Navigation-->
- <div class="navbar-fixed">
-    {% block navigation %}
-    <nav id="nav_f" class="default_color" role="navigation">
-        <div class="container">
-            <div class="nav-wrapper"><a id="logo-container" href="/" class="brand-logo">Django Outline</a>
-            <ul id="nav-mobile" class="right side-nav">
-                <li><a href="/#intro">Get Started</a></li>
-                <li><a href="/#work">Docs</a></li>
-		{% if not request.user.is_authenticated %}
-                <li><a href="{% url 'account_signup' %}">Signup</a></li>
-                <li><a href="{% url 'account_login' %}">Login</a></li>
-		{% else %}
-		<li>
-                <form method="post" id="logout-form" action="{% url 'account_logout' %}">{% csrf_token %}
-                <a href="#" onclick="$('#logout-form').submit();">Logout</a>
-		</form>
-		</li>
-		{% endif %}
-                <li><a href="https://github.com/powellc/outline" target="_blank"><i class="fa fa-github"></i> Github</a></li>
-            </ul><a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-            </div>
-        </div>
-    </nav>
-    {% endblock %}
-</div>
-
-<!--Hero-->
-{% block banner %}
-{% endblock %}
-
-<!--Intro and service-->
-<div id="intro" class="section scrollspy">
-    <div class="container">
-    {% block content %}
-    {% endblock %}
-    </div>
-</div>
-
-{% block secondary_content %}
-{% endblock %}
-
-<!--Footer-->
-<footer id="contact" class="page-footer default_color scrollspy">
-    <div class="container">  
-        <div class="row">
-            <div class="col l6 s12">
-                <form class="col s12">
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <i class="mdi-action-account-circle prefix white-text"></i>
-                            <input id="icon_prefix" type="text" class="validate white-text">
-                            <label for="icon_prefix" class="white-text">Colin Powell</label>
-                        </div>
-                        <div class="input-field col s6">
-                        </div>
-                        <div class="input-field col s12">
-                            <i class="mdi-editor-mode-edit prefix white-text"></i>
-                            <textarea id="icon_prefix2" class="materialize-textarea white-text"></textarea>
-                            <label for="icon_prefix2" class="white-text">Message</label>
-                        </div>
-                        <div class="col offset-s7 s5">
-                            <button class="btn waves-effect waves-light red darken-1" type="submit" name="action">Submit
-                                <i class="mdi-content-send right white-text"></i>
-                            </button>
-                        </div>
+    <body itemscope itemtype="http://schema.org/WebPage">
+        {% block header %}
+            <header class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation">
+                <nav class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Saleor</a>
                     </div>
-                </form>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">powellc</h5>
-                <ul>
-                    <li><a class="white-text" href="http://www.onec.me/blog">Blog</a></li>
-                </ul>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Social</h5>
-                <ul>
-                    <li>
-                        <a class="white-text" href="https://github.com/powellc/outline">
-                            <i class="small fa fa-github-square white-text"></i> Github
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright default_color">
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav">
+                            {% for category in categories %}
+                                <li>
+                                    <a href="{{ category.get_absolute_url }}">
+                                        {{ category }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="{% url "cart:index" %}"><i class="fa fa-shopping-cart"></i> {% trans "Cart" %} {% if request.cart %}<span class="badge">{{ request.cart.count }}</span>{% endif %}</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href=".">{% blocktrans %}Hello, {{ user }}{% endblocktrans %} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url "profile:details" %}">{% trans "Your profile" %}</a></li>
+                                    <li><a href="{% url "profile:orders" %}">{% trans "Your orders" %}</a></li>
+                                    {% if user.is_staff %}
+                                        <li class="divider"></li>
+                                        <li><a href="{% url "dashboard:index" %}">{% trans "Dashboard" %}</a></li>
+                                    {% endif %}
+                                    <li class="divider"></li>
+                                    <li><a href="{% url "registration:logout" %}">{% trans "Log out" %}</a></li>
+                                  </ul>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="{% url "registration:login" %}">Sign in</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        {% endblock %}
+        {% if messages %}
         <div class="container">
-            Made by <a class="white-text" href="http://github.com/powellc">powellc</a>. Thanks to <a class="white-text" href="http://materializecss.com/">materializecss</a> and <a class="white-text" href="http://joashpereira.com">joashpereira.com</a>
+            {% for message in messages %}
+            <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ message }}
+            </div>
+            {% endfor %}
         </div>
-    </div>
-</footer>
-
-
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="{% static 'js/materialize.js' %}"></script>
-    <script src="{% static 'js/init.js' %}"></script>
- 
-    {% block body_js %}{% endblock body_js %}
-
+        {% endif %}
+        <div class="container">
+            {% block outerbreadcrumb %}
+            <ul class="breadcrumb" itemprop="breadcrumb">
+                {% block breadcrumb %}
+                <li>
+                    <a href="/">{% trans "Home" %}</a>
+                </li>
+                {% endblock breadcrumb %}
+            </ul>
+            {% endblock outerbreadcrumb %}
+            {% block outercontent %}
+            <div class="row">
+                <div class="col-sm-12">
+                    {% block content %}
+                        <div class="row">
+                            {% include "category/_items.html" %}
+                        </div>
+                    {% endblock content %}
+                </div>
+            </div>
+            {% endblock outercontent %}
+        </div>
+        {% block footer %}
+            <footer>
+                <div class="container">
+                    <p class="pull-right">
+                        &copy; Mirumee Software 2015
+                    </p>
+                </div>
+            </footer>
+        {% endblock %}
+        {% block footer_scripts %}
+            <script src="{% static "js/storefront.js" %}"></script>
+        {% endblock footer_scripts %}
     </body>
 </html>

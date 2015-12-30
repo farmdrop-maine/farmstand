@@ -19,8 +19,7 @@ class Common(Configuration):
         ('Admin', 'info@example.com'),
     )
 
-    # You'll likely want to add your own auth model.
-    AUTH_USER_MODEL = 'custom_user.EmailUser'
+    AUTH_USER_MODEL = 'userprofile.User'
 
     MANAGERS = ADMINS
 
@@ -38,6 +37,31 @@ class Common(Configuration):
 
     TEMPLATE_DEBUG = False
 
+    DEFAULT_CURRENCY = 'USD'
+    DEFAULT_WEIGHT = 'Ounces'
+
+    CANONICAL_HOSTNAME = os.environ.get('CANONICAL_HOSTNAME', 'localhost:8000')
+    PAYMENT_BASE_URL = 'http://%s/' % CANONICAL_HOSTNAME
+
+    PAYMENT_MODEL = 'order.Payment'
+
+    PAYMENT_VARIANTS = {
+        'default': ('payments.dummy.DummyProvider', {})
+    }
+
+    PAYMENT_HOST = os.environ.get('PAYMENT_HOST', 'localhost:8000')
+
+    SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+    SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+
+    CHECKOUT_PAYMENT_CHOICES = [
+        ('default', 'Dummy provider')
+    ]
+
+    FACEBOOK_APP_ID = ""
+    GOOGLE_CLIENT_ID = ""
+
+
     # Application definition
 
     INSTALLED_APPS = (
@@ -51,21 +75,36 @@ class Common(Configuration):
         "django.contrib.sitemaps",
         "django.contrib.staticfiles",
 
-        'custom_user',
-        'allauth',
-        'allauth.account',
-        'allauth.socialaccount',
-        'allauth.socialaccount.providers.github',
-        'allauth.socialaccount.providers.google',
         "django_extensions",
         'floppyforms',
         'rest_framework',
 
+        # Saleor apps
+        'saleor.userprofile',
+        'saleor.product',
+        'saleor.cart',
+        'saleor.checkout',
+        'saleor.core',
+        'saleor.order',
+        'saleor.registration',
+        'saleor.dashboard',
+
+        # External apps
+        'versatileimagefield',
+        'django_prices',
+        'emailit',
+        'mptt',
+        'payments',
+        'selectable',
+        'materializecssform'
     )
 
     TEMPLATE_CONTEXT_PROCESSORS = Configuration.TEMPLATE_CONTEXT_PROCESSORS + \
         ("django.core.context_processors.request",
          "django.core.context_processors.tz",
+         "saleor.core.context_processors.canonical_hostname",
+         "saleor.core.context_processors.default_currency",
+         "saleor.core.context_processors.categories"
         )
 
     MIDDLEWARE_CLASSES = (
@@ -75,6 +114,10 @@ class Common(Configuration):
         "django.middleware.csrf.CsrfViewMiddleware",
         "django.contrib.messages.middleware.MessageMiddleware",
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'saleor.cart.middleware.CartMiddleware',
+        'saleor.core.middleware.DiscountMiddleware',
+        'saleor.core.middleware.GoogleAnalytics',
+
     )
 
     STATICFILES_FINDERS = (
@@ -90,6 +133,9 @@ class Common(Configuration):
 
     AUTHENTICATION_BACKENDS = (
         "django.contrib.auth.backends.ModelBackend",
+        'saleor.registration.backends.EmailPasswordBackend',
+        #'saleor.registration.backends.ExternalLoginBackend',
+        'saleor.registration.backends.TrivialBackend',
         "allauth.account.auth_backends.AuthenticationBackend",)
 
     ROOT_URLCONF = 'farmstand.urls'

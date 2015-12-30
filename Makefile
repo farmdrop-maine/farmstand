@@ -2,6 +2,8 @@ install:
 	virtualenv venv
 	venv/bin/python setup.py install
 	venv/bin/python manage.py syncdb --noinput
+	npm install
+	./node_modules/.bin/grunt
 
 
 deps:
